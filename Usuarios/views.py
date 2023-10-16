@@ -24,4 +24,5 @@ def create(self, request, *args, **kwargs):
     if len(_suscripción)>0:
         raise Exception("Ya existe una suscripción")
 
-    return Response({"status": "created"}):
+    return Response({"status": "created"})
+
