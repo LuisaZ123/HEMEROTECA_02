@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     "Libros",
     "Usuarios",
     "Prestamos",
+    "Suscripciones"
     "rest_framework"
 ]
 
