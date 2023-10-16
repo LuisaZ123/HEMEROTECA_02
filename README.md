@@ -35,3 +35,21 @@ class UserViewSet(viewsets.ModelViewSet):
         self.perform_create(serializer)
         headers = self.get_success_headers(serializer.data)
         return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)
+#PARA CREAR EL ESTADO ACTIVO A UN PRESTAMO Y VERIFICARLO AL GENERAR OTRO PRESTAMO 
+
+1. Crear una nueva función llamada get_absolute_url para el modelo Prestamo en el archivo de views.
+def get_absolute_url(self):
+        return Response('prestamo-detail', kwargs={'pk': self.pk})
+2. Crear una nueva función llamada is_late para el modelo Prestamo en views
+def is_late(self):
+        if self.fecha_de_devolución is None:
+            return False
+        return self.fecha_de_devolución > self.fecha_de_vencimiento
+3. Crear una nueva función llamada get_debt_collection_metric para el modelo Prestamo.
+def get_debt_collection_metric(prestamos):
+    total_amount_owed = 0
+    for prestamo in prestamos:
+        if prestamo.is_late():
+            total_amount_owed += prestamo.amount_owed
+    return total_amount_owed
+
