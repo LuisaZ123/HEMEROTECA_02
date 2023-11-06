@@ -52,4 +52,20 @@ def get_debt_collection_metric(prestamos):
         if prestamo.is_late():
             total_amount_owed += prestamo.amount_owed
     return total_amount_owed
-
+#PARA CREAR EL SISTEMA DE AUTENTICACIÓN#
+Para establecer los permisos por tipo de usurario se agrega cada uno de las clasificaciones en models de la app de usuarios 
+class user(AbstractUser):
+    ROLES_HEMEROTECA: (
+        1, "BIBLIOTECARIO",
+        2,"ARCHIVISTA",
+        3, "INVESTIGADOR",
+        4, "ESTUDIANTE", 
+        5, "LECTOR",
+        6, "ADMINISTRADOR"
+    )
+y se establece el permiso en el archivo de views de las demás apps:
+class CreatePermision(BasePermission):
+    def has_permission(self, request, view):
+        print(f"Pase por el permiso {request.user.id}")
+        if view.action == "create" : return request.user.rol == #Número de clasificación de usuario
+        return True
