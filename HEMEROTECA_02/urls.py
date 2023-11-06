@@ -23,4 +23,6 @@ urlpatterns = [
     path("Suscripciones/" include("Suscripciones.urls")),
     path("Prestamos/" include("prestamos.urls")),
     path("Usuarios/" include("Usuariosl.urls")),
+    path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
+    path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
 ]

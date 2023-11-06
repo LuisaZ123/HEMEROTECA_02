@@ -4,6 +4,9 @@ from rest_framework.response import Response
 from .serializers import UserSerializer, SuscripciónSerializer
 from .models import user, suscripción
 
+from rest_framework.permissions import AllowAny
+from rest_framework.generics import CreateAPIView 
+
 # Create your views here.
 class userViewset(viewset):
     serializer_class= UserSerializer
@@ -25,4 +28,8 @@ def create(self, request, *args, **kwargs):
         raise Exception("Ya existe una suscripción")
 
     return Response({"status": "created"})
+class CreateUserView (CreateAPIView):
 
+    model = get.user.model()
+    permission_classes= [AllowAny]
+    serializer_class = UserSerializer
