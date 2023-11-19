@@ -69,3 +69,33 @@ class CreatePermision(BasePermission):
         print(f"Pase por el permiso {request.user.id}")
         if view.action == "create" : return request.user.rol == #Número de clasificación de usuario
         return True
+#DOCUMENTACIÓN CON SWAGGER#
+1. Instalar la libreria correcta pip install -U drf-yasg
+2. Para la validación instalar pip install -U drf-yasg[validation]
+3. En el archivo settings.py del proyecto general agregar 'drf_yasg' en INSTALLED APPS
+4. Se agrega al archivo de urls.py del proyecto general:
+   from django.urls import re_path
+   from rest_framework import permissions
+   from drf_yasg.views import get_schema_view
+   from drf_yasg import openapi
+5. Agregar al archivo de urls.py y cambiar los datos:
+   schema_view = get_schema_view(
+   openapi.Info(
+      title="Snippets API",
+      default_version='v1',
+      description="Test description",
+      terms_of_service="https://www.google.com/policies/terms/",
+      contact=openapi.Contact(email="contact@snippets.local"),
+      license=openapi.License(name="BSD License"),
+   ),
+   public=True,
+   permission_classes=(permissions.AllowAny,),
+)
+
+6. En el mismo archivo se copia:
+   path('docs/', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
+   path('redoc/', schema_view.with_ui('redoc', cache_timeout=0), name='schema-redoc'),
+   ...
+]
+7. Comprobar con python .\manage.py runserver
+
