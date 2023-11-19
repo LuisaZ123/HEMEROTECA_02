@@ -42,7 +42,8 @@ INSTALLED_APPS = [
     "Prestamos",
     "Suscripciones",
     "rest_framework",
-    "rest_framework_simplejwt"
+    "rest_framework_simplejwt",
+    "drf_yasg"
 
 ]
 
