@@ -79,6 +79,7 @@ class CreatePermision(BasePermission):
    from drf_yasg.views import get_schema_view
    from drf_yasg import openapi
 5. Agregar al archivo de urls.py y cambiar los datos:
+   
    schema_view = get_schema_view(
    openapi.Info(
       title="Snippets API",
@@ -92,10 +93,10 @@ class CreatePermision(BasePermission):
    permission_classes=(permissions.AllowAny,),
 )
 
-6. En el mismo archivo se copia:
+7. En el mismo archivo se copia:
    path('docs/', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
    path('redoc/', schema_view.with_ui('redoc', cache_timeout=0), name='schema-redoc'),
    ...
 ]
-7. Comprobar con python .\manage.py runserver
+8. Comprobar con python .\manage.py runserver
 
